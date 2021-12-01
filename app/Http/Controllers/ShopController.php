@@ -19,14 +19,25 @@ class ShopController extends Controller
       if(request()->category){
           $products = Product::with('categories')->whereHas('categories', function ($query) {
               $query->where('slug', request()->category);
-          })->get();
+          });
           $categories = Category::all();
-          $categoryAllField = Category::where('slug', request()->category)->first();
-          $categoryName = $categoryAllField->name;
+          $categoryAllField = optional(Category::where('slug', request()->category))->first();
+          $categoryName = optional($categoryAllField)->name;
       }else{
-          $products = Product::inRandomOrder()->take(12)->get();
+          // Normal Get
+          // $products = Product::inRandomOrder()->take(12)->get();
+          // Paginate Get
+          $products = Product::where('featured', true);
           $categories = Category::all();
           $categoryName = 'Featured';
+      }
+
+      if(request()->sort == 'low_high'){
+        $products = $products->orderBy('price', 'asc')->paginate(9);
+      } elseif (request()->sort == 'high_low') {
+        $products = $products->orderBy('price', 'desc')->paginate(9);
+      } else{
+        $products = $products->paginate(9);
       }
 
       return view('shop')->with([
