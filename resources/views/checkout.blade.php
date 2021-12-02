@@ -164,8 +164,9 @@
                 <a href="#" class="have-code">Have a Code?</a>
 
                 <div class="have-code-container">
-                    <form action="#">
-                        <input type="text">
+                    <form action="{!! route('coupon.store') !!}" method="post">
+                        @csrf
+                        <input type="text" name="coupon_code" id="coupon_code">
                         <input type="submit" class="button" value="Apply">
                     </form>
                 </div>

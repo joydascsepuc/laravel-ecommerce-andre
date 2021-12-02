@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfirmationController;
+use App\Http\Controllers\CouponsController;
 
 
 
@@ -36,6 +37,9 @@ Route::get('/cart',[CartController::class, 'index'])->name('cart.index');
 Route::post('/cart',[CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/{product}',[CartController::class, 'destroy'])->name('cart.destroy');
 Route::post('/cart/switchToSaveForLater/{product}',[CartController::class, 'switchToSaveForLater'])->name('cart.switchToSaveForLater');
+
+Route::post('/coupon',[CouponsController::class, 'store'])->name('coupon.store');
+Route::delete('/coupon',[CouponsController::class, 'destroy'])->name('coupon.destroy');
 
 // AJAX CONTROLLER
 Route::patch('/cart/{product}',[CartController::class, 'update'])->name('cart.update');
