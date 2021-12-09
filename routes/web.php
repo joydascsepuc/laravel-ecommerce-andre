@@ -55,3 +55,6 @@ Route::get('/thankyou',[ConfirmationController::class, 'index'])->name('confirma
 Route::get('/empty', function(){
   Cart::instance('saveForLater')->destroy();
 });
+Route::get('/empty2', function(){
+  Cart::destroy();
+});

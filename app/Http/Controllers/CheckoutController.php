@@ -17,7 +17,21 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+        $tax = config('cart.tax') / 100;
+        $discount = session()->get('coupon')['discount'] ?? 0;
+        $newSubtotal = (float)Cart::subtotal() - (float)$discount;
+        $newTax = $newSubtotal * (float)$tax;
+        $newTotal = $newSubtotal * (1 + (float)$tax);
+
+        // return view('checkout')->with([
+        //   'discount' => $discount,
+        //   'newSubtotal' => $newSubtotal,
+        //   'newTax' => $newTax,
+        //   'newTotal' => $newTotal,
+        // ]);
+
         return view('checkout');
+
     }
 
     /**
