@@ -29,7 +29,7 @@
 
             <br>
             <p>
-                {{ $product->description }}
+                {!! $product->description !!}
             </p>
             <br>
 

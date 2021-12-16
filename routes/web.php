@@ -58,3 +58,8 @@ Route::get('/empty', function(){
 Route::get('/empty2', function(){
   Cart::destroy();
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
