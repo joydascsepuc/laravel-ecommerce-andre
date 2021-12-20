@@ -19,7 +19,7 @@
     <body>
         <header class="with-background">
             <div class="top-nav container">
-                <div class="logo">Laravel Ecommerce</div>
+                <div class="logo"><a href="{{ route('mainPage') }}">Laravel Ecommerce</a></div>
                 {{ menu('main', 'partials.menus.main') }}
             </div> <!-- end top-nav -->
             <div class="hero container">
@@ -54,7 +54,7 @@
                 <div class="products text-center">
                     @foreach ($products as $key => $product)
                       <div class="product">
-                          <a href="{!! route('shop.show',$product->slug) !!}"><img src="{{ asset('storage/'.$product->image) }}" alt="product"></a>
+                          <a href="{!! route('shop.show',$product->slug) !!}"><img src="{{ productImage($product->image) }}" alt="product"></a>
                           <a href="{!! route('shop.show',$product->slug) !!}"><div class="product-name">{{ $product->name }}</div></a>
                           <div class="product-price">$ {{ ($product->price) / 100 }}</div>
                       </div>
