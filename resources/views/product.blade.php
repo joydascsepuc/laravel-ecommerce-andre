@@ -23,12 +23,15 @@
             <div class="product-section-image">
                 <img src="{{ productImage($product->image) }}" alt="product">
             </div>
-            <div class="mt-2">
-                @if ($product->images)
+            <div class="product-section-images">
+                <div class="product-section-thumbnail">
+                    
+                </div>
+                {{-- @if ($product->images)
                     @foreach (json_decode($product->images, true) as $image)
                         <img src="{{ productImage($image) }}" alt="product-multi">
                     @endforeach
-                @endif
+                @endif --}}
             </div>
         </div>
         <div class="product-section-information">
