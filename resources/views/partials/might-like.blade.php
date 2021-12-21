@@ -6,7 +6,7 @@
               <a href="{!! route('shop.show', $product->slug) !!}" class="might-like-product">
                   <img src="{{ asset('storage/'.$product->image) }}" alt="product">
                   <div class="might-like-product-name">{{ $product->name }}</div>
-                  <div class="might-like-product-price">{{ $product->price / 100 }}</div>
+                  <div class="might-like-product-price">${{ $product->price / 100 }}</div>
               </a>
             @endforeach
         </div>
