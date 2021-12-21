@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+// use Gloudemans\Shoppingcart\Facades\Cart;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,9 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+
+    protected $redirectTo = '/checkout';
+    
 
     /**
      * Create a new controller instance.
@@ -70,4 +73,14 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+    // public function redirectTo()
+    // {
+    //     if (Cart::total()) {
+    //         return '/';
+    //     } else{
+    //         return '/checkout';
+    //     }
+    // }
+
 }

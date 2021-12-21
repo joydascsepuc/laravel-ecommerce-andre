@@ -47,7 +47,7 @@ Route::patch('/cart/{product}',[CartController::class, 'update'])->name('cart.up
 Route::delete('/saveForLater/{product}',[SaveForLaterController::class, 'destroy'])->name('saveForLater.destroy');
 Route::post('/saveForLater/switchToCart/{product}',[SaveForLaterController::class, 'switchToCart'])->name('saveForLater.switchToCart');
 
-Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
 Route::post('/checkout',[CheckoutController::class, 'store'])->name('checkout.store');
 
 Route::get('/thankyou',[ConfirmationController::class, 'index'])->name('confirmation.index');
