@@ -50,6 +50,8 @@ Route::post('/saveForLater/switchToCart/{product}',[SaveForLaterController::clas
 Route::get('/checkout',[CheckoutController::class, 'index'])->name('checkout.index')->middleware('auth');
 Route::post('/checkout',[CheckoutController::class, 'store'])->name('checkout.store');
 
+Route::get('/guestcheckout',[CheckoutController::class, 'index'])->name('guestcheckout.index');
+
 Route::get('/thankyou',[ConfirmationController::class, 'index'])->name('confirmation.index');
 
 Route::get('/empty', function(){

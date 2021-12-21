@@ -17,6 +17,15 @@ class CheckoutController extends Controller
      */
     public function index()
     {
+
+        if (! Cart::count()) {
+            return redirect()->route('shop.index');
+        }
+
+        if (auth()->user() && request()->is('guestcheckout')) {
+            return redirect()->route('checkout.index');
+        }
+
         $tax = config('cart.tax') / 100;
         $discount = session()->get('coupon')['discount'] ?? 0;
         $newSubtotal = (float)Cart::subtotal() - (float)$discount;
