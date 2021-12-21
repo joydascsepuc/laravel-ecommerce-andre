@@ -21,8 +21,13 @@
     <body>
         <header class="with-background">
             <div class="top-nav container">
-                <div class="logo"><a href="{{ route('mainPage') }}">Laravel Ecommerce</a></div>
-                {{ menu('main', 'partials.menus.main') }}
+                <div class="top-menu-left">
+                    <div class="logo"><a href="{{ route('mainPage') }}">Laravel</a></div>
+                    {{ menu('main', 'partials.menus.main') }}
+                </div>
+                <div class="top-menu-right">
+                    @include('partials.menus.main-right')
+                </div>
             </div> <!-- end top-nav -->
             <div class="hero container">
                 <div class="hero-copy">
