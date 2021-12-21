@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-// use Gloudemans\Shoppingcart\Facades\Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class RegisterController extends Controller
 {
@@ -74,13 +74,14 @@ class RegisterController extends Controller
         ]);
     }
 
-    // public function redirectTo()
-    // {
-    //     if (Cart::total()) {
-    //         return '/';
-    //     } else{
-    //         return '/checkout';
-    //     }
-    // }
+    // If the user have any amount in cart then go to checkout otherwise in the home page
+    public function redirectTo()
+    {
+        if (Cart::count()) {
+            return '/checkout';
+        } else{
+            return '/';
+        }
+    }
 
 }
