@@ -20,6 +20,9 @@
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
 
+         {{-- Custom Style - JOY --}}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
         @yield('extra-css')
     </head>
 
