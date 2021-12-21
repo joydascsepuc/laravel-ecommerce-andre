@@ -68,3 +68,27 @@
     margin-bottom: 16px;
 }
 
+.logo{
+    margin-right: 58px;
+}
+
+.top-menu-left {
+  display: flex;
+}
+
+.top-menu-left li{
+    margin-right: 20px;
+}
+
+.top-menu-left li: last-child{
+    margin-right: 0px;
+}
+
+.top-menu-right {
+  display: flex;
+  align-items: center;
+}
+
+.top-menu-right li{
+  margin-right: 20px;
+}

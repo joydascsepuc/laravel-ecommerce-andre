@@ -37,4 +37,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // Below two methods to override the login to return back to last visiting page
+    public function showLoginForm()
+    {
+        session()->put('previousURL', url()->previous());
+
+        return view('auth.login');
+    }
+
+    public function redirectTo()
+    {
+        return str_replace(url('/'), '', session()->get('previousURL', '/'));
+    }
 }
