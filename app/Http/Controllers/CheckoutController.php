@@ -7,6 +7,8 @@ use App\Http\Requests\CheckoutRequest;
 use App\Models\Product;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
+use App\Models\Order;
+use App\Models\OrderProduct;
 
 class CheckoutController extends Controller
 {
@@ -32,12 +34,12 @@ class CheckoutController extends Controller
         $newTax = $newSubtotal * (float)$tax;
         $newTotal = $newSubtotal * (1 + (float)$tax);
 
-        // return view('checkout')->with([
-        //   'discount' => $discount,
-        //   'newSubtotal' => $newSubtotal,
-        //   'newTax' => $newTax,
-        //   'newTotal' => $newTotal,
-        // ]);
+        return view('checkout')->with([
+          'discount' => $discount,
+          'newSubtotal' => $newSubtotal,
+          'newTax' => $newTax,
+          'newTotal' => $newTotal,
+        ]);
 
         return view('checkout');
 
@@ -81,6 +83,41 @@ class CheckoutController extends Controller
             // Success Message
             // return back()->with('success_message', 'Your payment is accepted!');
             // dd($charge);
+
+            
+            // ON SUCCESS ACTIONS
+            
+            // Insert Into the order table
+            $order = Order::create([
+                'user_id' => auth()->user() ? auth()->user()->id : null,
+                'billing_email' => $request->email,
+                'billing_name' => $request->name,
+                'billing_address' => $request->address,
+                'billing_city' => $request->city,
+                'billing_province' => $request->province,
+                'billing_postalcode' => $request->postalcode,
+                'billing_phone' => $request->phone,
+                'billing_name_on_card' => $request->name_on_card,
+                'billing_discount' => getNumbers()->get('discount'),
+                'billing_discount_code' => getNumbers()->get('code'),
+                'billing_subtotal' => getNumbers()->get('newSubtotal'),
+                'billing_tax' => getNumbers()->get('newTax'),
+                'billing_total' => getNumbers()->get('newTotal'),
+                'error' => null,
+            ]);
+
+            // Insert Into order_product table
+            // foreach (Cart::content() as $item) {
+            //     OrderProduct::create([
+            //         'order_id' => $order->id,
+            //         'product_id' => $item->model->id,
+            //         'quantity' => $item->qty,
+            //     ]);
+            // }
+
+            // Destroy Cart Instance 
+            Cart::instance('default')->destroy();
+
 
             return redirect()->route('confirmation.index')->with('success_message', 'Your payment is accepted!');
 
