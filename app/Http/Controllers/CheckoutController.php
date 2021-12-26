@@ -9,6 +9,8 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
 use App\Models\Order;
 use App\Models\OrderProduct;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\OrderPlaced;
 
 class CheckoutController extends Controller
 {
@@ -86,7 +88,9 @@ class CheckoutController extends Controller
 
             
             // ON SUCCESS ACTIONS
-            $this->addToOrdersTable($request, null);
+            $order = $this->addToOrdersTable($request, null);
+            Mail::send(new OrderPlaced($order));
+
 
             // Destroy Cart Instance 
             Cart::instance('default')->destroy();
@@ -130,6 +134,8 @@ class CheckoutController extends Controller
                 'quantity' => $item->qty,
             ]);
         }
+
+        return $order;
     }
 
     /**
