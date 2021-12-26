@@ -86,34 +86,7 @@ class CheckoutController extends Controller
 
             
             // ON SUCCESS ACTIONS
-            
-            // Insert Into the order table
-            $order = Order::create([
-                'user_id' => auth()->user() ? auth()->user()->id : null,
-                'billing_email' => $request->email,
-                'billing_name' => $request->name,
-                'billing_address' => $request->address,
-                'billing_city' => $request->city,
-                'billing_province' => $request->province,
-                'billing_postalcode' => $request->postalcode,
-                'billing_phone' => $request->phone,
-                'billing_name_on_card' => $request->name_on_card,
-                'billing_discount' => getNumbers()->get('discount'),
-                'billing_discount_code' => getNumbers()->get('code'),
-                'billing_subtotal' => getNumbers()->get('newSubtotal'),
-                'billing_tax' => getNumbers()->get('newTax'),
-                'billing_total' => getNumbers()->get('newTotal'),
-                'error' => null,
-            ]);
-
-            // Insert Into order_product table
-            // foreach (Cart::content() as $item) {
-            //     OrderProduct::create([
-            //         'order_id' => $order->id,
-            //         'product_id' => $item->model->id,
-            //         'quantity' => $item->qty,
-            //     ]);
-            // }
+            $this->addToOrdersTable($request, null);
 
             // Destroy Cart Instance 
             Cart::instance('default')->destroy();
@@ -122,10 +95,41 @@ class CheckoutController extends Controller
             return redirect()->route('confirmation.index')->with('success_message', 'Your payment is accepted!');
 
         } catch (\Exception $e) {
-
+            $this->addToOrdersTable($request, $e->getMessage());
             return back()->withErrors('Error! '. $e->getMessage());
         }
 
+    }
+
+    protected function addToOrdersTable($request, $errors){
+
+        // Insert Into the order table
+        $order = Order::create([
+            'user_id' => auth()->user() ? auth()->user()->id : null,
+            'billing_email' => $request->email,
+            'billing_name' => $request->name,
+            'billing_address' => $request->address,
+            'billing_city' => $request->city,
+            'billing_province' => $request->province,
+            'billing_postalcode' => $request->postalcode,
+            'billing_phone' => $request->phone,
+            'billing_name_on_card' => $request->name_on_card,
+            'billing_discount' => getNumbers()->get('discount'),
+            'billing_discount_code' => getNumbers()->get('code'),
+            'billing_subtotal' => getNumbers()->get('newSubtotal'),
+            'billing_tax' => getNumbers()->get('newTax'),
+            'billing_total' => getNumbers()->get('newTotal'),
+            'error' => $errors,
+        ]);
+
+        // Insert Into order_product table
+        foreach (Cart::content() as $item) {
+            OrderProduct::create([
+                'order_id' => $order->id,
+                'product_id' => $item->model->id,
+                'quantity' => $item->qty,
+            ]);
+        }
     }
 
     /**
