@@ -92,3 +92,37 @@
 .top-menu-right li{
   margin-right: 20px;
 }
+
+.search-form {
+    position: relative;
+}
+
+.search-icon {
+    color: gray;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+}
+
+.search-box {
+    padding: 10px 12px 10px 34px;
+    width: 400px;
+    max-width: 100%;
+    font-size: 14px;
+}
+
+.breadcrumbs {
+    background: $light-gray-background;
+    border-bottom: 1px solid $separator-color;
+    padding: 24px 0;
+}
+
+.breadcrumb-separator {
+    font-size: 14px;
+}
+
+.breadcrumbs-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

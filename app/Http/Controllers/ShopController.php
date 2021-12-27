@@ -57,4 +57,28 @@ class ShopController extends Controller
       ]);
     }
 
+    public function search(Request $request)
+    {
+
+      $request->validate([
+        'query' => 'required|min:3',
+      ]);
+
+      $query = $request->input('query');
+
+      // Normal Query Search
+      // $products = Product::where('name', 'like', "%$query%")
+      //                     ->orWhere('details', 'like', "%$query%")
+      //                     ->orWhere('description', 'like', "%$query%")->paginate(10);
+
+      // Using nicolaslopezj/searchable
+      \DB::statement("SET SQL_MODE=''"); // Disable the strict rule is not a good idea in config/database. Just Use this for one time to remove strict.
+      $products = Product::search($query)->paginate(10);
+
+      return view('search-results')->with([
+          'products' => $products,
+      ]);
+      
+    }
+
 }
