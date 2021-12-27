@@ -71,3 +71,24 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/search', [ShopController::class, 'search'])->name('search');
+
+
+
+// Additional For install application to the server
+
+Route::get('/storage', function (){
+ Artisan::call('storage:link');
+});
+
+Route::get('/configload', function (){
+ Artisan::call('config:cache');
+});
+
+Route::get('/routecache', function (){
+ Artisan::call('route:cache');
+});
+
+Route::get('/routecache', function (){
+ Artisan::call('view:cache');
+});
+

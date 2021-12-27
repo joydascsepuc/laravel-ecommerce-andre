@@ -5,12 +5,21 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+// This one for is OLD
 use Nicolaslopezj\Searchable\SearchableTrait;
+
+// This one is Laravel Scout with algolia
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
     use HasFactory;
+
+    // For Nicolaslopezj\Searchable
     use SearchableTrait;
+
+    // For Scount and Algolia
+    use Searchable;
 
      /**
      * Searchable rules.
