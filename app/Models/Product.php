@@ -41,6 +41,30 @@ class Product extends Model
         ],
     ];
 
+    /**
+     * Get the name of the index associated with the model.
+     *
+     * @return string
+     */
+    public function searchableAs()
+    {
+        return 'products';
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    // public function toSearchableArray()
+    // {
+    //     $array = $this->toArray();
+
+    //     // Customize the data array...
+
+    //     return $array;
+    // }
+
     // public function PresentPrice()
     // {
     //   return money_format('$%i', $this->price / 100);

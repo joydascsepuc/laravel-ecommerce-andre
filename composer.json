@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "nicolaslopezj/searchable": "^1.13",
-        "tcg/voyager": "^1.5"
+        "tcg/voyager": "^1.5",
+        "algolia/algoliasearch-client-php": "^3.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
