@@ -51,6 +51,9 @@ class ShopController extends Controller
     {
       $product = Product::where('slug', $slug)->firstOrFail();
       $mightLike = Product::where('slug', '!=' , $slug)->MightAlsoLike()->get();
+
+        
+
       return view('product')->with([
         'product' => $product,
         'mightLike' => $mightLike

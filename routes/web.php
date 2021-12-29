@@ -43,6 +43,7 @@ Route::delete('/coupon',[CouponsController::class, 'destroy'])->name('coupon.des
 
 // AJAX CONTROLLER
 Route::patch('/cart/{product}',[CartController::class, 'update'])->name('cart.update');
+// END AJAX
 
 Route::delete('/saveForLater/{product}',[SaveForLaterController::class, 'destroy'])->name('saveForLater.destroy');
 Route::post('/saveForLater/switchToCart/{product}',[SaveForLaterController::class, 'switchToCart'])->name('saveForLater.switchToCart');

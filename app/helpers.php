@@ -29,3 +29,16 @@ function getNumbers()
         'newTotal' => $newTotal,
     ]);
 }
+
+function getStockLevel($quantity)
+{
+    if ($quantity > 7) {
+        $stockLevel = 'In Stock';
+      }else if($quantity < 5){
+        $stockLevel = 'Low Stock';
+      } else if($quantity == 0){
+        $stockLevel = 'Out Of Stock';
+      }
+
+    return $stockLevel;
+}

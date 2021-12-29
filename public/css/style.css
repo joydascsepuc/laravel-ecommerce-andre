@@ -127,6 +127,28 @@
     align-items: center;
 }
 
+.cart-count {
+  display: inline-block;
+  /*position: absolute;
+  right: 0;
+  top: -22px;
+  right: -24px;*/
+  background: #FFD94D;
+  color: #212121;
+  line-height: 0;
+  border-radius: 50%;
+  font-size: 14px;
+  
+}
+
+.cart-count span {
+    display: inline-block !important;
+    padding-top: 50%;
+    padding-bottom: 50%;
+    margin-left:6px;
+    margin-right:6px;
+  }
+
 /*Start:  Alogolia Auto-complete CSS*/
 
 @import 'https://fonts.googleapis.com/css?family=Montserrat:400,700';

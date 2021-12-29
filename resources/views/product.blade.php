@@ -59,6 +59,7 @@
         <div class="product-section-information">
             <h1 class="product-section-title">{{ $product->name; }}</h1>
             <div class="product-section-subtitle">{{ $product->details }}</div>
+            <div>{{ getStockLevel($product->quantity); }}</div>
             <div class="product-section-price">$ {{ ($product->price) / 100 }}</div>
 
             <br>
@@ -74,7 +75,11 @@
               <input type="hidden" value="{{ $product->id }}" name="id">
               <input type="hidden" value="{{ $product->name }}" name="name">
               <input type="hidden" value="{{ $product->price / 100 }}" name="price">
-              <button class="button button-plain" type="submit">Add to Cart</button>
+              
+              @if ($product->quantity != 0)
+                <button class="button button-plain" type="submit">Add to Cart</button>
+              @endif
+
             </form>
 
         </div>
