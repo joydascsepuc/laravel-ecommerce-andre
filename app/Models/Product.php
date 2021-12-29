@@ -46,23 +46,9 @@ class Product extends Model
      *
      * @return string
      */
-    public function searchableAs()
-    {
-        return 'products';
-    }
-
-    /**
-     * Get the indexable data array for the model.
-     *
-     * @return array
-     */
-    // public function toSearchableArray()
+    // public function searchableAs()
     // {
-    //     $array = $this->toArray();
-
-    //     // Customize the data array...
-
-    //     return $array;
+    //     return 'products';
     // }
 
     // public function PresentPrice()
@@ -78,6 +64,22 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany('App\Models\Category');
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray()
+    {
+        $array = $this->toArray();
+
+        $extraFields = [
+            'categories' => $this->categories->pluck('name')->toArray(),
+        ];
+
+        return array_merge($array, $extraFields);
     }
 
 }

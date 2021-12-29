@@ -72,6 +72,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/search', [ShopController::class, 'search'])->name('search');
 
+Route::get('/search-algolia', [ShopController::class, 'searchAlgolia'])->name('search-algolia');
+
 
 
 // Additional For install application to the server

@@ -81,4 +81,9 @@ class ShopController extends Controller
       
     }
 
+    public function searchAlgolia(Request $request)
+    {
+      return view('search-results-algolia');
+    }
+
 }
