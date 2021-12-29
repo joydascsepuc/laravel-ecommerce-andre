@@ -1,5 +1,8 @@
 <?php
 
+use Carbon\Carbon;
+
+
 function setActiveCategory($category, $output = 'font-weight-bold'){
     return request()->category == $category ? $output : '';
 }
@@ -33,12 +36,24 @@ function getNumbers()
 function getStockLevel($quantity)
 {
     if ($quantity > 7) {
-        $stockLevel = 'In Stock';
+        $stockLevel = '<div class="badge badge-success">In Stock</div>';
       }else if($quantity < 5){
-        $stockLevel = 'Low Stock';
+        $stockLevel = '<div class="badge badge-warning">Low Stock</div>';
       } else if($quantity == 0){
-        $stockLevel = 'Out Of Stock';
+        $stockLevel = '<div class="badge badge-danger">Not available</div>';
       }
 
     return $stockLevel;
+}
+
+function presentDate($date)
+{
+    return Carbon::parse($date)->format('M d, Y');
+}
+
+function presentPrice($price)
+{
+    // return money_format('$%i', $price / 100);
+    if ($price<0) return "-".asDollars(-$price);
+    return '$' . number_format($price, 2);
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfirmationController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\OrdersController;
 
 
 
@@ -85,6 +86,7 @@ Route::middleware('auth')->group(function(){
   Route::patch('/my-profile', [UsersController::class, 'update'])->name('users.update');
 
   Route::get('/my-orders', [OrdersController::class, 'index'])->name('orders.index');
+  Route::get('/my-order/{order}', [OrdersController::class, 'show'])->name('orders.show');
 });
 
 
