@@ -340,3 +340,67 @@ hr {
 }
 
 /*Algolia Search Result*/
+
+
+/*Auth Page Design*/
+
+.auth-pages {
+    margin: 100px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 100px;
+    min-height: 60vh;
+}
+
+.auth-pages input {
+    border: 1px solid light;
+    padding: 16px 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.auth-pages input[type="checkbox"] {
+    width: auto;
+}
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.auth-button {
+    background: #212121;
+    color: white;
+    border-radius: 5px;
+    padding: 12px 50px;
+
+    
+}
+
+.auth-button:hover {
+    background: #212121;
+}
+.auth-button-hollow {
+    background: white;
+    color: #212121;
+    border-radius: 5px;
+    border: 1px solid #212121;
+    padding: 12px 50px;
+}
+.auth-button-hollow:hover {
+    background: #212121;
+    color: $white;
+}
+
+.auth-right {
+    border-left: 1px solid #CDCDCD;
+    padding-left: 100px;
+}
+
+.already-have-container {
+    text-align: right;
+}
+/*End Auth Page*/

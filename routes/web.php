@@ -74,7 +74,7 @@ Route::get('/search', [ShopController::class, 'search'])->name('search');
 
 Route::get('/search-algolia', [ShopController::class, 'searchAlgolia'])->name('search-algolia');
 
-
+Route::get('/guestCheckout', [CheckoutController::class, 'index'])->name('guestCheckout.index');
 
 // Additional For install application to the server
 
