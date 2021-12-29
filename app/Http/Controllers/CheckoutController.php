@@ -65,6 +65,12 @@ class CheckoutController extends Controller
      */
     public function store(CheckoutRequest $request)
     {
+
+        // Check the racing conditiion
+        if ($this->productsAreNoLongerAvaibale()) {
+            return back()->withErrors('Sorry! One item in your cart are no longer available.!');
+        }
+
         $contents = Cart::content()->map(function ($item){
             return $item->model->slug.', '.$item->qty;
         })->values()->toJson();
@@ -91,10 +97,11 @@ class CheckoutController extends Controller
             $order = $this->addToOrdersTable($request, null);
             Mail::send(new OrderPlaced($order));
 
+            // Foreach products deduct the quantity in the stock
+            $this->decreaseQuantites();
 
             // Destroy Cart Instance 
             Cart::instance('default')->destroy();
-
 
             return redirect()->route('confirmation.index')->with('success_message', 'Your payment is accepted!');
 
@@ -138,48 +145,24 @@ class CheckoutController extends Controller
         return $order;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    protected function decreaseQuantites()
     {
-        //
+        foreach (Cart::content() as $item) {
+            $product = Product::find($item->model->id);
+            $product->update(['quantity' => $product->quantity - $item->qty]);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    protected function productsAreNoLongerAvaibale(){
+        foreach (Cart::content() as $item) {
+            $product = Product::find($item->model->id);
+            
+            if ($product->quantity < $item->qty) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

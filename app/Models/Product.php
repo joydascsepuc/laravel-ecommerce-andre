@@ -21,6 +21,9 @@ class Product extends Model
     // For Scount and Algolia
     use Searchable;
 
+
+    protected $fillable = ['quantity'];
+
      /**
      * Searchable rules.
      *
