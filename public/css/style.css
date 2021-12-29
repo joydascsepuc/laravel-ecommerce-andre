@@ -426,3 +426,35 @@ hr {
     text-align: right;
 }
 /*End Auth Page*/
+
+/*Profile Page*/
+
+.my-profile label {
+    display: block;
+}
+
+.my-profile .form-control {
+    margin-bottom: 30px;
+    border: none;
+}
+
+.form-control input {
+  border: 1px solid $text-color-light;
+  padding: 16px 10px;
+  border-radius: 5px;
+  width: 66.6%;
+  font-size: 14px;
+}
+
+.my-profile .my-profile-button {
+    background: $text-color;
+    color: black;
+    border-radius: 5px;
+    padding: 12px 50px;
+}
+
+.my-profile-button:hover {
+  background: #212121;
+  color: white;
+}
+/*End Profile Page*/

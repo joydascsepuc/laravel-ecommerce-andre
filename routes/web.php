@@ -9,6 +9,7 @@ use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ConfirmationController;
 use App\Http\Controllers\CouponsController;
+use App\Http\Controllers\UsersController;
 
 
 
@@ -76,6 +77,18 @@ Route::get('/search', [ShopController::class, 'search'])->name('search');
 Route::get('/search-algolia', [ShopController::class, 'searchAlgolia'])->name('search-algolia');
 
 Route::get('/guestCheckout', [CheckoutController::class, 'index'])->name('guestCheckout.index');
+
+
+// Grouping routes those needs middleware auth -- Example
+Route::middleware('auth')->group(function(){
+  Route::get('/my-profile', [UsersController::class, 'edit'])->name('users.edit');
+  Route::patch('/my-profile', [UsersController::class, 'update'])->name('users.update');
+
+  Route::get('/my-orders', [OrdersController::class, 'index'])->name('orders.index');
+});
+
+
+
 
 // Additional For install application to the server
 
